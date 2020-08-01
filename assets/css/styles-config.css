@@ -1,0 +1,70 @@
+/* customize me by adding your own ./assets/css/styles-config.css file.
+   easy is just to copy this file to your own assets directory:
+   $ cp ./themes/pypyr-docs/assets/css/styles-config.css ./assets/css/
+
+   freely edit the values in this new file.
+   hugo will automatically use this new file ./assets/css/styles-config.css in your
+   own assets directory instead of the original at
+   ./themes/pypyr-docs/assets/css/styles-config.css.
+
+   this way you don't have to worry about tricky merges from the pypyr-docs
+   theme master every time there's an update.
+*/
+:root {
+  /* default theme: muted blue */
+  --primary: #90caf9;
+  --primary-dark-variant: #5d99c6;
+  --primary-light-variant: #c3fdff;
+  --secondary: #81d4fa;
+  --secondary-dark-variant: #4ba3c7;
+  --secondary-light-variant: #c3fdff;
+
+  /* theme: yuck sand
+  --primary: #d3c1c3;
+  --primary-dark-variant: #DDA15E ;
+  --primary-light-variant: #fff4f6;
+  --secondary: #e2d0be;
+  --secondary-dark-variant: #b09f8e;
+  --secondary-light-variant: #fffff1;
+  */
+
+  --background: #121212;
+  --surface: #121212;
+  --error: #cf6679;
+  --on-primary: #000;
+  --on-secondary: #000;
+  --on-background: 255 255 255;
+  --on-surface: 255 255 255;
+  --on-error: 0 0 0;
+  --text-on-background-high: rgba(var(--on-background) / 0.87);
+  --text-on-background-medium: rgba(var(--on-background) / 0.6);
+  --text-on-background-disabled: rgba(var(--on-background) / 0.38);
+  --text-on-surface-high: rgba(var(--on-surface) / 0.87);
+  --text-on-surface-medium: rgba(var(--on-surface) / 0.6);
+  --text-on-surface-disabled: rgba(var(--on-surface) / 0.38);
+  --text-on-error-high: rgba(var(--on-error) / 0.87);
+  --text-on-error-medium: rgba(var(--on-error) / 0.6);
+  --text-on-error-disabled: rgba(var(--on-error) / 0.38);
+  --text-on-secondary: rgba(0 0 0 / 0.87);
+  --top-nav-logo-width: clamp(200px, 16vw, 500px);
+  --top-nav-logo-responsive-width: 40vw;
+  --top-nav-columns: 5;
+  --top-nav-columns-responsive: 5;
+  --text-bottom-margin: calc(1.125 * 1.2rem);
+  --disabled-state: #000;
+  --body-padding: 8px;
+  --gap: 16px;
+  --text-line-length: 36rem;
+  --block-quote-width: 38rem;
+  --elevation-overlay: 255 255 255;
+  --elevation-01: rgba(var(--elevation-overlay) / 0.05);
+  --elevation-02: rgba(var(--elevation-overlay) / 0.07);
+  --elevation-03: rgba(var(--elevation-overlay) / 0.08);
+  --elevation-04: rgba(var(--elevation-overlay) / 0.09);
+  --elevation-06: rgba(var(--elevation-overlay) / 0.11);
+  --elevation-08: rgba(var(--elevation-overlay) / 0.12);
+  --elevation-12: rgba(var(--elevation-overlay) / 0.14);
+  --elevation-16: rgba(var(--elevation-overlay) / 0.15);
+  --elevation-24: rgba(var(--elevation-overlay) / 0.16);
+  --home-cards-min-width: clamp(280px, 25vw, var(--text-line-length));
+}

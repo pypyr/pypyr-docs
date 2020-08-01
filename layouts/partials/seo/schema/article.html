@@ -1,0 +1,64 @@
+{
+{{- if .doContext }}
+  "@context": "https://schema.org",
+{{- end }}
+{{- with .context }}
+  {{ $page := . -}}
+  {{ $doStrictValidate := .Param "seo_enable_strict_validate" | default false -}}
+  {{/* auto-generated list pages do not have front-matter, therefore don't do strict validate. */}}
+  {{ $author := "" -}}
+  {{ with .GitInfo -}}
+    {{ $author = .AuthorName -}}
+  {{ end -}}
+  "@type": {{ .Param "seo_article_type" | jsonify }},
+  {{ with .Param "seo_article_author" | default $author -}}
+  "author": {
+    "@type": "Person",
+    "name": {{ . | jsonify }}{{ with $page.Param "seo_article_author_url"}},
+    "url": {{ . | jsonify }}{{ end }}{{ with $page.Param "seo_article_author_same_as"}},
+    "sameAs": [{{ delimit (apply . "jsonify" ".") ", "}}]
+    {{ end }}
+  },
+  {{ else -}}
+    {{ if $doStrictValidate }}{{ errorf "seo article author required by google structured data test tool. Page: %q" .Path -}}{{ end -}}
+  {{ end -}}
+  "articleSection": {{ .CurrentSection.LinkTitle | jsonify }},
+  "dateModified": {{ .Lastmod | jsonify }}, {{/* looks like jsonify puts into iso8601 */}}
+  "datePublished": {{ .PublishDate | jsonify }},
+  {{ $headline := .Param "seo_article_headline" | default .Title -}}
+  {{ if and $doStrictValidate (gt (len $headline) 110) -}}
+    {{ errorf "seo article headline > 110 chars. Page: %q Headline: %q" .Path $headline -}}
+  {{ end -}}
+  "headline": {{ $headline | jsonify }},
+  {{ with $images := .Param "seo_article_image" -}}
+  "image": [ {{ range $i, $img := $images }}{{ if gt $i 0 }},{{ end }}
+  {
+    "@type": "ImageObject",
+    "url": {{ (resources.Get (index $img "url") | fingerprint ).Permalink | jsonify }},
+    {{ $height := index $img "height" -}}
+    {{ $width := index $img "width" -}}
+    {{ if and $doStrictValidate (lt (mul $height $width) 300000 ) -}}
+      {{ errorf "seo article img resolution < 300,000. Page: %q Image: %q" $page.Path (index $img "url") }}
+    {{ end -}}
+    {{ if and $doStrictValidate (lt $width 1200 ) -}} {{/* AMP min 1200, non-AMP min 696 */}}
+      {{ errorf "seo article img width < 1,200. Page: %q Image: %q" $page.Path (index $img "url") }}
+    {{ end -}}
+    "height": {{ $height | jsonify }},
+    "width": {{ $width | jsonify }}
+  }{{ end }}
+  ], {{ end }}
+  "inLanguage": {{ .Language.Lang | jsonify }},
+  {{ with .Param "seo_article_keywords" | default .Keywords -}}
+  "keywords": {{ . | jsonify }},
+  {{ end -}}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  },
+  "publisher": {
+    "@id": {{ .Param "seo_org_id" | jsonify }}
+  },
+  "url": {{ .Permalink | jsonify }},
+  "wordCount": {{ .WordCount | jsonify }}
+{{ end -}}
+}

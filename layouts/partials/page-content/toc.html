@@ -1,0 +1,24 @@
+{{/* 
+  TableOfContents returns empty <nav id="TableOfContents"></nav> if no headers
+  exist, so can't rely on a nil existence check. 
+*/}}
+{{ $headers := findRE "<h[2-4].*?>(.|\n])+?</h[2-4]>" .Content }}
+{{ $hasHeaders := ge (len $headers) 1 }}
+{{ $adHocHeaders := .Scratch.Get "adHocHeaders" }}
+{{ if $hasHeaders }}
+  <aside class="grid-toc elevation-02">
+    <h6 id="table-of-contents">on this page</h6>
+    {{.TableOfContents}}
+  </aside>
+{{ else if $adHocHeaders }}
+  <aside class="grid-toc elevation-02">
+    <h6 id="table-of-contents">on this page</h6>
+    <nav id="TableOfContents">
+      <ol>
+        {{ range $adHocHeaders -}}
+          <li><a href="#{{ .id }}">{{ .text }}</a></li>
+        {{- end }}
+      </ol>
+    </nav>
+  </aside>
+{{ end }}

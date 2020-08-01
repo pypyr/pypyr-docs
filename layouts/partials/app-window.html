@@ -1,0 +1,11 @@
+<div class="app-window">
+  <div class="app-window-top-bar">
+    <span class="app-window-buttons">
+      <span class="circle red"></span><span class="circle yellow"></span><span class="circle green"></span>
+    </span>
+    <span class="app-window-title">{{ .title }}</span>
+  </div>
+  <div class="app-window-content">
+  {{ highlight .content .lang "" }}
+  </div>
+</div>

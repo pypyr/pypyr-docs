@@ -1,0 +1,13 @@
+<div class="docs-content">
+    {{ partial "page-content/breadcrumb.html" . }}
+
+    {{ partial "page-content/toc.html" . }}
+
+    <main class="docs-main">
+        {{ block "docs-main" . }}{{ end }}
+    </main>
+
+    {{ partial "page-content/source-control-links.html" . }}
+
+    {{ partial "page-content/taxonomy-terms.html" . }}
+</div>

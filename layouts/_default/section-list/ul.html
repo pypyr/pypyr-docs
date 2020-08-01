@@ -1,0 +1,8 @@
+{{ $pages := partial "list/get-pages.html" . }}
+{{ with $pages }}
+<ul>
+    {{ range . }}
+    <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+    {{ end }}
+</ul>
+{{ end }}

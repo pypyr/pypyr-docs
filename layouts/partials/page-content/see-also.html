@@ -1,0 +1,12 @@
+{{ $related := .Site.Pages.Related . | first 5 }}
+{{ with $related }}
+  <section class="see-also elevation-02">
+    <h2>see also</h2>
+
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

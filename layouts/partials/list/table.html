@@ -1,0 +1,24 @@
+{{/* pass context=$ pages=[page collection to iterate] */}}
+{{ $table := .context.Param "list_fields" | default (slice (dict "heading" "title" "field" "linktitle" "islink" true "fallback" "title") (dict "heading" "description" "field" "description")) }}
+<table>
+{{ if .context.Param "list_show_table_heading" | default true }}
+    <tr>
+        {{ range $table }}
+            <th>{{ .heading }}</th>
+        {{ end }}
+    </tr>
+{{ end }}
+{{ range .pages }}
+    {{ $page := . }}
+    <tr>
+        {{ range $table }}
+            {{ $v := $page.Param .field | default ($page.Param .fallback)}}
+            {{ if .islink }}
+                <td><a href="{{ $page.Permalink }}">{{ $v }}</a></td>
+            {{ else }}
+                <td>{{ $v | markdownify }}</td>
+            {{ end }}
+        {{ end }}
+    </tr>
+{{ end }}
+</table>

@@ -1,0 +1,3 @@
+{{ $linkIcon := (resources.Get "icons/external-link.svg" | fingerprint "md5" ).Permalink }}
+{{ $permaString := printf `${1}&nbsp;<a class="headline-anchor" href="#${2}" aria-label="anchor"><svg class="permalink"><title>permalink</title><use href="%s#external-link"></use></svg></a> ${3}` $linkIcon }}
+{{ . | replaceRE "(<h[2-9] id=\"([^\"]+)\".+)(</h[2-9]+>)" $permaString | safeHTML }}

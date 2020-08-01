@@ -1,0 +1,23 @@
+{{ $pages := .Data.Terms.Alphabetical }}
+{{ with $pages }}
+{{ $table := $.Param "list_fields" | default (slice (dict "heading" "title" "field" "title" "islink" true) (dict "heading" "description" "field" "description")) }}
+<table>
+    <tr>
+        {{ range $table }}
+        <th>{{ .heading }}</th>
+        {{ end }}
+    </tr>
+    {{ range . }}
+    {{ $page := . }}
+    <tr>
+        {{ range $table }}
+        {{ if .islink }}
+        <td><a href="{{ $page.Page.Permalink }}">{{ $page.Page.Param .field }}</a></td>
+        {{ else }}
+        <td>{{ $page.Page.Param .field | markdownify }}</td>
+        {{ end }}
+        {{ end }}
+    </tr>
+    {{ end }}
+</table>
+{{ end }}

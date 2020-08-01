@@ -1,0 +1,15 @@
+<header class="header elevation-01">
+  {{/* if or (and ((.IsHome) (isset .Params "showLogoOnHome")) (.Site.Params.showLogoOnHome)) (not .IsHome) */}}
+  {{ if or ($.Param "show_logo_on_home" | default false) (not .IsHome) }}
+    {{- partial "logo-and-name.html" . -}}
+  {{ end }}
+  {{ with .Site.Menus.top }}
+    <nav class="top-nav-links{{ if $.IsHome }} nav-center{{ end }}" aria-label="top navigation">
+      <ul{{ if $.IsHome }} class="nav-items-center" {{ end }}>
+        {{- range . -}}
+        <li><a href="{{ .URL }}"{{ if eq $.Section .KeyName  }} class="top-active" {{ end }}>{{ with .Pre }}<span class="top-nav-links-pre">{{- partialCached (printf "%s" . ) $ -}}</span>{{ end }}{{ .Name }}{{ .Post }}</a></li>
+        {{- end -}}
+        </ul>
+    </nav>
+  {{ end }}
+</header>

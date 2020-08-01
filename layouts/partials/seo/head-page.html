@@ -1,0 +1,3 @@
+{{ if .Param "seo_article_enable_for_this_page" | default true -}}
+    {{ partial "seo/schema/graph-article-org.html" . -}}
+{{ end -}}

@@ -1,0 +1,24 @@
+{{ $pages := partial "list/get-pages.html" . }}
+{{ with $pages }}
+    {{ $doSeoCarousel := $.Param "seo_is_carousel" | default false }}
+    {{ $table := $.Param "list_fields" | default (slice (dict "heading" "title" "field" "linktitle" "islink" true "fallback" "title") (dict "heading" "description" "field" "description" "fallback" "summary")) }}
+    <table{{ if $doSeoCarousel }} vocab="http://schema.org/" typeof="ItemList"{{ end}}>
+        <tr>
+            {{ range $table }}
+                <th>{{ .heading }}</th>
+            {{ end }}
+        </tr>
+        {{ range $i, $page := . }}
+            <tr{{ if $doSeoCarousel }} property="itemListElement" typeof="ListItem"{{ end}}>
+                {{ range $table }}
+                    {{ $v := $page.Param .field | default ($page.Param .fallback)}}
+                    {{ if .islink }}
+                        <td><a href="{{ $page.Permalink }}"{{ if $doSeoCarousel }} property="url"{{ end }}>{{ $v }}</a>{{ if $doSeoCarousel }}<meta property="position" content="{{ add $i 1 }}">{{ end }}</td>
+                    {{ else }}
+                        <td>{{ $v | markdownify }}</td>
+                    {{ end }}
+                {{ end }}
+            </tr>
+            {{ end }}
+    </table>
+{{ end }}

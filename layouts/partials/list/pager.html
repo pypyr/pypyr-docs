@@ -1,0 +1,7 @@
+{{/* internal pagination template will render regardless of whether paging
+     actually happened and end up showing pager with identical pages defaulting
+     to pagination count of 10 per page.
+*/}}
+{{ if $.Param "list_paginate" }}
+  {{ template "_internal/pagination.html" . }}
+{{ end }}

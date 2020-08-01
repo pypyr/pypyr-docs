@@ -1,0 +1,7 @@
+{{ $title := .Site.Title | markdownify }}
+<a href="/" class="top-nav-logo" aria-label="home">
+  <img class="top-nav-logo-img" src="{{ (resources.Get $.Site.Params.logo | fingerprint ).Permalink }}" alt="{{ $title }} logo">
+</a>
+{{ if $.Site.Params.show_title_in_header }}
+  <a class="top-nav-logotype" href="/" aria-label="home">{{ $title }}</a>
+{{ end }}

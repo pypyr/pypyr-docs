@@ -1,0 +1,32 @@
+{{ $pages := partial "list/get-pages.html" . }}
+{{ $doSeoCarousel := $.Param "seo_is_carousel" | default false }}
+{{ $doDate := $.Param "list_include_date" | default false }}
+{{ $dateFormat := $.Param "date_format" | default "2006-01-02" }}
+{{ with $pages }}
+    <ul class="section-summary-cards"{{ if $doSeoCarousel }} vocab="http://schema.org/" typeof="ItemList"{{ end}}>
+        {{ range $i, $page := . }}
+        <li class="section-summary-card elevation-01"{{ if $doSeoCarousel }} property="itemListElement" typeof="ListItem"{{ end}}>
+            <h5><a href="{{ .RelPermalink }}"{{ if $doSeoCarousel }} property="url"{{ end }}>{{ $page.LinkTitle }}</a></h5>
+            {{ if $doDate }} 
+                <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body2">{{ .Date.Format $dateFormat }}</time>
+            {{ end }}
+            <p>{{ ( $page.Description | default .Summary ) | markdownify }}</p>
+            {{ with $page.Params.card_extra_summary }}
+            <div class="elevation-02">
+                <h6>{{ .heading }}</h6>
+                {{ if $page.Param "card_extra_summary_is_code" | default false -}}
+                {{/* no p tag around code block div */}}
+                {{ .details | markdownify }}
+                {{ else -}}
+                <p class="no-bottom-margin">{{ .details | markdownify }}</p>
+                {{ end -}}
+            </div>
+            {{ end }}
+            {{ if false }}
+                <a href="{{ $page.RelPermalink }}" class="body2">more. . .</a>
+            {{ end }}
+            {{ if $doSeoCarousel }}<meta property="position" content="{{ add $i 1 }}">{{ end }}
+        </li>
+        {{ end }}
+    </ul>
+{{ end }}

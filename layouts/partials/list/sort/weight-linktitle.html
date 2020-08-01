@@ -1,0 +1,5 @@
+{{ $pages := slice }}
+{{ range .GroupBy "Weight" }}
+    {{ $pages = $pages | append .Pages.ByLinkTitle }}
+{{ end }}
+{{ return $pages }} 

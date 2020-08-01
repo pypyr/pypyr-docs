@@ -1,0 +1,9 @@
+{{ if .Param "seo_enable_structured_data" | default false -}}
+    {{ if .IsHome -}}
+        {{ partial "seo/head-home.html" . -}}
+    {{ else if .IsPage -}}
+        {{ partial "seo/head-page.html" . -}}
+    {{ else if .IsNode -}}
+        {{ partial "seo/head-list.html" . -}}
+    {{ end -}}
+{{ end -}}

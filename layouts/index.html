@@ -1,0 +1,21 @@
+{{ define "main" }}
+
+<main>
+  {{- partial "home/hero.html" . -}}
+  {{ with .Params.show_default_header}}
+  <header class="home-header-title">
+    <h1>{{$.Title}}</h1>
+    {{ with $.Params.subtitle }}
+    <span class="subtitle">{{.}}</span>
+    {{ end }}
+  </header>
+  {{ end }}
+  {{- partial "home/cards.html" . -}}
+  {{ with .Content }}
+  <div class="home-content">
+    <!-- from content/_index.md -->
+    {{.}}
+  </div>
+  {{ end }}
+</main>
+{{ end }}

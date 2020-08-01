@@ -1,0 +1,26 @@
+{
+{{- if .doContext }}
+  "@context": "https://schema.org",
+{{- end }}
+{{- with .context }}
+  "@type": "SoftwareApplication",
+  "name": {{ .Param "seo_app_name" | jsonify }},
+  "description": {{ .Param "seo_app_description" | jsonify }},
+  "operatingSystem": {{ .Param "seo_app_os" | jsonify }},
+  "applicationCategory": {{ .Param "seo_app_category" | jsonify }},
+  "softwareRequirements": {{ .Param "seo_app_requirements" | jsonify }},
+  "maintainer": {
+    "@id": {{ .Param "seo_org_id" | jsonify }}
+  }{{ if .Param "seo_app_rating_value" }},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ .Param "seo_app_rating_value" | jsonify }},
+    "ratingCount": {{ .Param "seo_app_rating_count" | jsonify }}
+  }{{ end }},
+  "offers": {
+    "@type": "Offer",
+    "price": {{ .Param "seo_app_price" | jsonify }}{{ with .Param "seo_app_currency" }},
+    "priceCurrency": {{ . | jsonify }}{{ end }}
+  }
+{{ end -}}
+}

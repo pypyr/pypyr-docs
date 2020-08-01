@@ -1,0 +1,19 @@
+{{- $isEmptyContent := eq (len .Content) 0 -}} {{/* (not .File) */}}
+{{- $showOnlyOnEmpty := .Param "show_auto_heading_only_on_empty_content" | default true -}}
+{{- if eq $isEmptyContent $showOnlyOnEmpty -}}
+    {{- $showListTitle := and .IsNode (.Param "list_show_auto_title" | default true) -}}
+    {{- $showPageTitle := and .IsPage (.Param "page_show_auto_title" | default true) -}}
+    {{ if or $showListTitle $showPageTitle -}}
+        {{ with .Title -}}
+            <h1>{{ . }}</h1>
+        {{ end -}}
+    {{ end -}}
+
+    {{- $showListDescription := and .IsNode (.Param "list_show_auto_description" | default true) -}}
+    {{- $showPageDescription := and .IsPage (.Param "page_show_auto_description" | default true) -}}       
+    {{ if or $showListDescription $showPageDescription -}}
+        {{ with .Description -}}
+            <p>{{ . }}</p>
+        {{ end -}}
+    {{ end -}}
+{{- end -}}

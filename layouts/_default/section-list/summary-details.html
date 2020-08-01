@@ -1,0 +1,14 @@
+{{ $pages := partial "list/get-pages.html" . }}
+{{ with $pages }}
+    {{ range . }}
+        <details>
+            <summary class="elevation-02"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></summary>
+            {{ with .Description }}
+                <p class="no-bottom-margin">{{ . | markdownify }}</p>
+            {{ end }}
+            {{ with .Pages }}
+                {{ partial "list/table.html" (dict "context" $ "pages" .) }}
+            {{ end }}
+        </details>
+    {{ end }}
+{{ end }}

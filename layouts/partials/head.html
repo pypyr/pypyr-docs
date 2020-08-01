@@ -1,0 +1,57 @@
+{{ $doStrictValidate := .Param "seo_enable_strict_validate" | default false -}}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {{ $title := cond (.Param "seo_title_append_site_name" | default true) (print .Title " | " .Site.Title) .Title -}}
+  {{ $maxTitle := .Param "seo_validate_title_max" | default 60 -}}
+  {{ if and $doStrictValidate (gt (len $title) $maxTitle) -}}
+    {{ errorf "title > %v chars. Page: %q Title: %q" $maxTitle .Path $title -}}
+  {{ else if and $doStrictValidate (eq (len $title) 3)}}
+    {{ errorf "title empty. Page: %q" .Path -}}
+  {{ end -}}
+  <title>{{ $title }}</title>
+  {{ $maxDescription := .Param "seo_validate_description_max" | default 158 -}}
+  {{ $description := .Param "seo_description" | default .Description }}
+  {{ if and $doStrictValidate (gt (len $description) $maxDescription) -}}
+    {{ errorf "description > %v chars. Page: %q Description: %q" $maxDescription .Path $description -}}
+  {{ else if and $doStrictValidate (eq (len $description) 0) (ne .Kind "404" )}}
+    {{ errorf "description empty. Page: %q" .Path -}}
+  {{ end -}}
+  {{ with $description -}}
+  <meta name="description" content="{{ . }}">
+  {{ end -}}
+  <!-- css -->
+  {{ $style := resources.Match "css/styles*.css"| resources.Concat "styles.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" {{ printf "integrity=%q" $style.Data.Integrity | safeHTMLAttr }}>
+  {{ $codeStyle := resources.Get "css/code-highlight.css"| minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $codeStyle.Permalink }}" {{ printf "integrity=%q" $codeStyle.Data.Integrity | safeHTMLAttr }}>
+  <!-- custom css -->
+  {{ range .Site.Params.custom_css -}}
+    {{ $customStyle := resources.Get . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $customStyle.Permalink }}" {{ printf "integrity=%q" $customStyle.Data.Integrity | safeHTMLAttr }}>
+  {{- end }}
+  {{ $js := resources.Get "js/script.js" | minify | fingerprint -}}
+  <script defer src="{{ $js.Permalink }}" {{ printf "integrity=%q" $js.Data.Integrity | safeHTMLAttr }}></script>
+  <!-- custom js -->
+  {{ range .Site.Params.custom_js -}}
+    {{ $customJs := resources.Get . | minify | fingerprint -}}
+    <script defer src="{{ $customJs.Permalink }}" {{ printf "integrity=%q" $customJs.Data.Integrity | safeHTMLAttr }}></script>
+  {{- end }}
+  <!-- fonts -->
+  {{ $font := "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto+Mono:400,400i&display=swap" -}}
+  {{ with .Param "font_href" -}} 
+    {{ $font = . -}}
+  {{ end -}}
+  <link href="{{ $font }}" rel="stylesheet"> <!-- replace | with %7C, go templating does the work -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+  {{ with .Params.robots -}}
+    <meta name="robots" content="{{.}}">
+  {{- end }}
+  {{ partial "gtag.html" . -}}
+  {{ partial "social/head.html" . -}}
+  {{ partial "seo/head.html" . -}}
+  {{ partial "custom-head.html" . -}}
+</head>

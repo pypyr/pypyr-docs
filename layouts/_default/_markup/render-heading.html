@@ -1,0 +1,2 @@
+{{ $linkIcon := (resources.Get "icons/external-link.svg" | fingerprint "md5" ).Permalink }}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }} <a href="#{{ .Anchor | safeURL }}" class="headline-anchor" aria-label="anchor"><svg class="permalink"><title>permalink</title><use href="{{ $linkIcon }}#external-link"></use></svg></a></h{{ .Level }}>

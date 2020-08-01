@@ -1,0 +1,38 @@
+{{ partial "html-declaration.html" . }}
+{{ partial "head.html" . }}
+
+<body class="docs-grid">
+  {{ partialCached "header.html" . .Section }}
+
+  <button id="show-leftnav" class="neutral-button icon-button primary-button">
+    <svg class="show-leftnav-chevron">
+      <title>open main navigation menu</title>
+      <use href="{{ (resources.Get "icons/chevron-right.svg" | fingerprint).Permalink }}#chevron-right"></use>
+    </svg>
+  </button>
+
+  <nav id="leftnavmenu" class="leftnavmenu elevation-03" aria-label="Primary Navigation">
+    {{ partial "tree-nav.html" . }}
+  </nav>
+
+  <div class="docs-content content-grid">
+    {{ partial "page-content/breadcrumb.html" . }}
+
+    {{ partial "page-content/toc.html" . }}
+
+    <main class="grid-main">
+      {{ block "docs-main" . }}{{ end }}
+    </main>
+
+    {{ partial "page-content/taxonomy-terms.html" . }}
+
+    {{ partial "page-content/source-control-links.html" . }}
+  </div>
+
+
+  {{ partial "footer.html" . }}
+  <div class="bottom-spacer" aria-hidden="true"></div>
+  <div id="disabled-state-overlay" aria-hidden="true" class="disabled-state-overlay hide-overlay"></div>
+</body>
+
+</html>

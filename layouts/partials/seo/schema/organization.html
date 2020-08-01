@@ -1,0 +1,26 @@
+{
+{{- if .doContext }}
+  "@context": "https://schema.org",
+{{- end }}
+{{- with .context }}
+  {{ $doStrictValidate := .Param "seo_enable_strict_validate" | default false -}}
+  "@id": {{ .Param "seo_org_id" | jsonify }},
+  "@type": "Organization",
+  "name": {{ .Param "seo_org_name" | jsonify }},
+  "url": {{ .Param "seo_org_url"  | jsonify }},
+  "description": {{ .Param "seo_org_description" | jsonify }}{{ if .Param "seo_org_logo_url" }},
+  {{ $height := .Param "seo_org_logo_height" -}}
+  {{ $width := .Param "seo_org_logo_width" -}}
+  {{ if and $doStrictValidate (or (lt $width 112 ) (lt $height 112 )) -}} 
+    {{ errorf "seo organization logo < 112x112. Page: %q Image: %q" .Path (.Param "seo_org_logo_url") }}
+  {{ end -}}
+  "logo": {
+    "@type": "ImageObject",
+    "url": {{ (resources.Get (.Param "seo_org_logo_url") | fingerprint ).Permalink | jsonify }},
+    "height": {{ $height | jsonify }},
+    "width": {{ $width | jsonify }}
+  }{{ end }}{{ with .Param "seo_org_same_as"}},
+  "sameAs": [{{ delimit (apply . "jsonify" ".") ", "}}]
+  {{ end -}}
+{{ end -}}
+}

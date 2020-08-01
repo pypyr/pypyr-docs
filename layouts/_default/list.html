@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="content-grid-centered">
+    {{ partial "page-content/breadcrumb.html" . }}
+
+    {{ partial "page-content/toc.html" . }}
+
+    <main class="grid-main">
+        {{ partial "list/tab-bar.html" . }}
+        <article class="width-min-line-length">
+            {{ partial "page-content/auto-h1-description.html" . -}}
+            {{ .Content }}
+            {{ .Render (.Param "list_style" | default "section-list/table" ) }}
+        </article>
+
+        {{ partial "list/pager.html" . }}
+
+        {{ partial "page-content/see-also.html" . }}
+        {{ partial "page-content/git-byline" . }}
+    </main>
+
+    {{ partial "page-content/taxonomy-terms.html" . }}
+
+    {{ partial "page-content/source-control-links.html" . }}
+</div>
+{{ end }}

@@ -1,0 +1,5 @@
+{{ $pages := slice }}
+{{ range .GroupByParam ($.Param "list_sort_group_by_param") }}
+    {{ $pages = $pages | append .Pages.ByParam ($.Param "list_sort_param") }}
+{{ end }}
+{{ return $pages }} 

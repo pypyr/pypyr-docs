@@ -1,0 +1,10 @@
+{{ define "docs-main" }}
+<article>
+  {{ partial "page-content/auto-h1-description.html" . -}}
+  {{ .Content }}
+  {{ .Render (.Param "list_style" | default "section-list/cards" ) }}
+</article>
+
+{{ partial "list/pager.html" . }}
+
+{{ end }}

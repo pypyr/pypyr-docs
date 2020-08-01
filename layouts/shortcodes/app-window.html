@@ -1,0 +1,9 @@
+{{ $content := ""}}
+{{ with .Get "path" }}
+  {{ $content = readFile . }}
+{{ else }}
+  {{ with .Inner }}
+    {{ $content = trim . "\n" }}
+  {{ end }}
+{{ end }}
+{{ partial "app-window.html" (dict "title" (.Get "title") "lang" (.Get "lang") "content" $content ) }}

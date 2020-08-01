@@ -1,0 +1,37 @@
+{{ $showCurrent := .Param "list_show_section_tabs" | default false }}
+{{ $showTop := .Param "list_show_top_level_section_tabs" | default false }}
+{{ if or $showCurrent $showTop }}
+    {{ $sections := slice }}
+    {{ $sectionsToIterate := .Sections }}
+    {{ if $showTop }}
+        {{ $sections = $sections | append .FirstSection }}
+        {{ $sectionsToIterate = .FirstSection.Sections }}
+    {{ else }}
+        {{ $sections = $sections | append . }}
+    {{ end }}
+
+    {{ if gt (len $sectionsToIterate) 0}}
+        {{ range $sectionsToIterate.GroupBy "Weight" }}
+            {{ $sections = $sections | append .ByLinkTitle }}
+        {{ end }}
+    {{ end }}
+
+    {{ if gt (len $sections) 1 }}
+        {{ $firstSection := index $sections 0 }}
+        <nav class="tab-bar-container" aria-label="sub-sections">
+            <ul class="tab-bar">
+            {{ range $sections -}}
+                {{/* 
+                    .InSection only true for direct descendants, not children of
+                    children. Thus also have to check for descendants where current
+                    iterator is NOT the root, else root will highlight every
+                    time.
+                 */}}
+                {{/* $highlightMe := $.InSection . */}}
+                {{ $highlightMe := or ($.InSection .) (and (ne $firstSection .) ($.IsDescendant .)) }}
+                <li class="tab-bar-li"><a href="{{ .RelPermalink}}" class="tab-bar-link{{ if $highlightMe }} tab-bar-current{{ end }}">{{ .Title }}</a></li>
+            {{- end }}
+            </ul>
+        </nav>
+    {{ end }}
+{{ end }}

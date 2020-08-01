@@ -1,0 +1,18 @@
+- title: Customize the cards
+  description: add this ./data/home/cards.yaml. 
+               see ./themes/pypyr-docs/data/home/cards-example.yaml for example format.
+               cli copy paste FTW! - 
+               cp ./themes/pypyr-docs/data/home/cards-example.yaml ./data/home/cards.yaml
+  img:
+    url: img1
+    alt: img alt text 1
+- title: title 2
+  description: description 2
+  img:
+    url: img2
+    alt: img alt text 1
+- title: title 3
+  description: description 3
+  img:
+    url: img3
+    alt: img alt text 1

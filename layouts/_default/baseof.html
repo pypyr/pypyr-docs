@@ -1,0 +1,13 @@
+{{ partial "html-declaration.html" . }}
+{{ partial "head.html" . }}
+
+<body class="header-content-footer-grid">
+    {{ partial "header.html" . }}
+    <div class="body-content">
+        {{ block "main" . }}{{ end }}
+    </div>
+    {{ partial "footer.html" . }}
+
+</body>
+
+</html>

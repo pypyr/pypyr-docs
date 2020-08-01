@@ -1,0 +1,12 @@
+description = "Very configurable & customizable documentation theme for documentation and product websites. With dark mode, left tree navigation, multiple page layouts, code highlighting, taxonomies. Probably more visually designed than most."
+features = ["responsive", "google analytics", "no bootstrap", "no jquery", "syntax highlighting", "multiple page layouts", "tree navigation"]
+homepage = "https://hugo.pypyr.io"
+license = "Apache 2.0"
+licenselink = "https://github.com/pypyr/pypyr-docs/blob/master/LICENSE.md"
+min_version = "0.59.1"
+name = "pypyr docs"
+tags = ["documentation", "docs", "responsive", "dark", "customizable", "product", "seo", "structured data"]
+
+[author]
+homepage = "https://github.com/yaythomas"
+name = "yaythomas"

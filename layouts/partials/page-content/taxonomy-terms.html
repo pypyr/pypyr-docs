@@ -1,0 +1,26 @@
+{{ $taxos := slice }}
+{{ range $taxonomyName := $.Param "taxonomy_sidebar" }}
+  {{ with $.GetTerms $taxonomyName }}
+    {{ $taxos = $taxos | append (dict "name" $taxonomyName "terms" . )}}
+  {{ end }}
+{{ end }}
+
+{{ with $taxos -}}
+  <aside class="grid-taxonomy elevation-02">
+    {{ range . -}}
+      {{ template "page-taxonomy-terms" . -}}
+    {{ end -}}
+  </aside>
+{{ end -}}
+
+{{ define "page-taxonomy-terms" }}
+  <section class="page-taxonomy" aria-label="related {{ .name }}">
+    <h6>{{ .name }}</h6>
+
+    <ul id="{{ .name }}" class="small-list">
+      {{ range .terms }}
+      <li><a href="{{ .Permalink }}" class="muted-with-hover">{{ .LinkTitle }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

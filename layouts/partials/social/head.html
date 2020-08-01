@@ -1,0 +1,82 @@
+{{- if .Param "social_enable" | default false }}
+    {{ $doStrictValidate := .Param "social_enable_strict_validate" | default false -}}
+    {{ $page := . -}}
+    {{ with .Param "social_fb_app_id" -}}
+        <meta property="fb:app_id" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_description" | default (.Param "seo_description") | default .Description -}}
+        {{ if and $doStrictValidate (gt (len .) 200 ) -}}
+            {{ errorf "social og:description > 200 chars. Page: %q Description: %q" $page.Path . }}
+        {{ end -}}
+        <meta property="og:description" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_image" -}}
+        <meta property="og:image" content="{{ (resources.Get . | fingerprint ).Permalink }}" />
+    {{ end -}}
+    {{ with .Param "social_og_image_alt" -}}
+        {{ if and $doStrictValidate (gt (len .) 420 ) -}}
+            {{ errorf "social og:image:alt > 420 chars. Page: %q Description: %q" $page.Path . }}
+        {{ end -}}
+        <meta property="og:image:alt" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_image_height" -}}
+        <meta property="og:image:height" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_image_type" -}}
+        <meta property="og:image:type" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_image_width" -}}
+        <meta property="og:image:width" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_site_name" | default .Site.Title -}}
+        <meta property="og:site_name" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_title" | default (.Param "seo_article_headline") | default .Title -}}
+        {{ if and $doStrictValidate (gt (len .) 70 ) -}}
+            {{ errorf "social og:title > 70 chars. Page: %q Description: %q" $page.Path . }}
+        {{ end -}}
+        <meta property="og:title" content="{{.}}" />
+    {{ end -}}
+    {{ with .Param "social_og_type" -}}
+        <meta property="og:type" content="{{.}}" />
+    {{ end -}}
+    <meta property="og:url" content="{{ .Permalink }}" />
+    {{/* if no twitter tags for title, description, image, twitter bot will defer
+        to og:title og:description og:image
+    */}}
+    {{ with .Param "social_twitter_card" -}}
+        <meta name="twitter:card" content="{{.}}">
+    {{ end -}}
+    {{ with .Param "social_twitter_site" -}}
+        <meta name="twitter:site" content="{{.}}">
+    {{ end -}}
+    {{ with .Param "social_twitter_creator" -}}
+        <meta name="twitter:creator" content="{{.}}">
+    {{ end -}}
+    {{ with .Param "social_twitter_title" -}}
+        {{ if and $doStrictValidate (gt (len .) 70 ) -}}
+            {{ errorf "social twitter:title > 70 chars. Page: %q Description: %q" $page.Path . }}
+        {{ end -}}
+        <meta name="twitter:title" content="{{.}}">
+    {{ end -}}
+    {{ with .Param "social_twitter_description" -}}
+        {{ if and $doStrictValidate (gt (len .) 200 ) -}}
+            {{ errorf "social twitter:description > 200 chars. Page: %q Description: %q" $page.Path . }}
+        {{ end -}}
+        <meta name="twitter:description" content="{{.}}">
+    {{ end -}}
+    {{ with .Param "social_twitter_image" -}}
+        <meta name="twitter:image" content="{{ (resources.Get . | fingerprint ).Permalink }}">
+    {{ end -}}
+    {{ with .Param "social_twitter_image_alt" -}}
+        {{ if and $doStrictValidate (gt (len .) 420 ) -}}
+            {{ errorf "social twitter:image:alt > 420 chars. Page: %q Description: %q" $page.Path . }}
+        {{ end -}}
+        <meta name="twitter:image:alt" content="{{.}}">
+    {{ end -}}
+    {{/*
+    1200×630 pixels and an
+    aspect ratio of 1.91:1,
+    but adhere to Twitter’s file size requirement of less than 1MB.
+    */}}
+{{ end -}}

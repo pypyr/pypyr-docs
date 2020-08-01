@@ -1,0 +1,44 @@
+{{ $pageType := $.Param "list_pages_to_list" | default "all" }}
+{{ $pages := slice }}
+{{ if eq $pageType "all" }}
+    {{ $pages = .Pages }}
+{{ else if eq $pageType "regular-only" }}
+    {{ $pages = .RegularPages }}
+{{ else if eq $pageType "regular-recursive" }}
+    {{ $pages = .RegularPagesRecursive }}
+{{ else if eq $pageType "section-regular-children" }}
+    {{ $pages = where .Site.RegularPages "Section" "=="  .Section }}
+{{ else if eq $pageType "parent-regular-children" }}
+    {{/* superseded by regular-recursive */}}
+    {{ range .Site.RegularPages }}
+        {{ if .IsDescendant $ }}
+            {{ $pages = $pages | append . }}
+        {{ end }}
+    {{ end }} 
+{{ else }}
+    {{ errorf "list_pages_to_list should be 'all', 'regular-only', 'regular-recursive' or 'section-regular-children'. It is instead: %s" $pageType }}
+{{ end }}
+
+{{ $out := slice }}
+{{/* weirdness around "paginate" on purpose - .Param does NOT return Hugo's 
+     standard "paginate" value (since it's not in "params") hugo also doesn't 
+     honor "paginate" when over-ridden on page front-matter. the config "paginate"
+     value also not accessible via the template API, and it also prints out an 
+     empty pager even when there is no paging. therefore, use own 
+     .Param.list.paginate - allowing for site-wide and page-specific overrides 
+     of this value.
+*/}}
+{{ $paginateMax := $.Param "list_paginate" }}
+{{ $sorter := $.Param "list_sort" | default "list/sort/weight-linktitle.html" }}
+{{ if $paginateMax }}
+    {{ $out = (.Paginate ((partial $sorter $pages)) $paginateMax).Pages }}
+{{ else }}
+    {{ $limit := $.Param "list_limit" | default 0 }}
+    {{ if gt $limit 0 }}
+        {{ $out = first $limit (partial $sorter $pages) }}
+    {{ else }}
+        {{ $out = (partial $sorter $pages) }}
+    {{ end }}
+{{ end }}
+
+{{ return $out }}

@@ -1,0 +1,13 @@
+{{ with .Site.Data.home.cards }}
+<section class="cards">
+{{ range . }}
+  <div class="card elevation-01">
+    {{ with .img }}
+    <img src="{{(resources.Get .url | fingerprint ).Permalink}}" alt="{{.alt}}" class="card-img">
+    {{ end }}
+    <h4>{{ .title }}</h4>
+    <p>{{ .description | markdownify }}</p>
+  </div>
+{{ end }}
+</section>
+{{ end }}

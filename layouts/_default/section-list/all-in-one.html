@@ -1,0 +1,28 @@
+{{ $pages := partial "list/get-pages.html" . }}
+{{ with $pages }}
+    {{ $.Scratch.Set "adHocHeaders" slice}}
+    <ul class="all-in-one-grid">    
+        {{ range . }}
+            <li class="skip-grid">
+                <article class="skip-grid">
+                    {{ $anchor := .LinkTitle | anchorize }}
+                    {{ $.Scratch.Add "adHocHeaders" (dict "id" $anchor "text" .LinkTitle ) }}
+                    <header class="aio-row-full">
+                        <h2 id="{{ $anchor }}" class="aio-heading">{{ .LinkTitle | safeHTML }}</h2><a href="{{ .RelPermalink }}" class="muted-with-hover">#</a>
+                    </header>
+                    {{ with (.Description | default .Summary) }}
+                        <div class="aio-row-full no-bottom-margin"><p>{{ . | markdownify }}</p></div>
+                    {{ end }}
+                    {{ with .Pages }}
+                        <dl class="aio-pages">
+                            {{ range . }}
+                                <dt class="aio-col1"><a href="{{ .Permalink }}">{{ .LinkTitle | safeHTML }}</a></dt>
+                                <dd class="aio-col2">{{ (.Description | default .Summary ) | markdownify }}</dd>
+                            {{ end }}
+                        </dl>
+                    {{ end }}
+                </article>
+            </li>
+        {{ end }}
+    </ul>
+{{ end }}

@@ -1,0 +1,48 @@
+{{ $current := . }}
+
+{{ $current.Scratch.Set "chevron" (resources.Get "icons/chevron-right.svg" | fingerprint).Permalink }}
+<!-- <div class="fixedposition"> -->
+  <!-- <div class="hide-leftnav-spacer"> -->
+  <button id="hide-leftnav" class="neutral-button icon-button">
+    <svg class="hide-leftnav-chevron">
+      <title>close navigation menu</title>
+      <use href="{{ .Scratch.Get "chevron" }}#chevron-right"></use>
+    </svg>
+  </button>
+  <!-- </div> -->
+  <ul class="leftnavroot">
+    {{ range index .Site.Menus $.Section }}
+      {{ template "menu-tree-nav" (dict "item" . "current" $current) }}
+    {{ end}}
+  </ul>
+  <!-- templates -->
+  {{ define "menu-tree-nav" }}
+  {{ $currentPage := .current }}
+  {{ with .item}}
+    {{ if .HasChildren }}
+      <li>
+        {{ $isAncestor := $currentPage.HasMenuCurrent $currentPage.Section . }}
+        <button class="nav-section-chevron-title neutral-button">
+          <span class="nav-section-pointer">
+            <svg class="nav-chevron{{ if $isAncestor }} nav-chevron-down{{ end }}">
+              <title>open or close sub-menu</title>
+              <use href="{{ $currentPage.Scratch.Get "chevron" }}#chevron-right"></use>
+            </svg>
+            <span>{{ .Name }}</span>
+          </span>
+        </button>
+
+        <ul class="nested{{ if $isAncestor }} expand{{ end }}">
+          {{ range .Children }}
+          {{ template "menu-tree-nav" (dict "item" . "current" $currentPage) }}
+          {{ end }}
+        </ul>
+      </li>
+    {{ else }}
+      <li class="{{if $currentPage.IsMenuCurrent $currentPage.Section . }}currentpage{{ end}}">
+          <a href="{{ .URL }}">{{ .Name }}</a>
+      </li>
+    {{ end }}
+   {{ end }}
+  {{ end }}
+<!-- </div> -->

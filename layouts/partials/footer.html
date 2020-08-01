@@ -1,0 +1,33 @@
+<footer class="footer elevation-01">
+  {{ partialCached "logo-and-name.html" . }}
+
+  <div class="col-1fr-centered">
+    {{ with .Site.Menus.footer_social }}
+    <ul class="footer-social-links" aria-label="social media links">
+      {{- range . -}}
+      <li>
+        <a href="{{ .URL }}" class="footer-social-link">
+          {{ with .Pre }}<div class="footer-social-links-pre">{{ partialCached (printf "%s" . ) $ }}</div>{{ end }}
+          {{ with .Name }}<small>{{ . }}</small>{{ end }}
+          {{ .Post }}
+        </a>
+      </li>
+      {{- end -}}
+    </ul>
+    {{ end }}
+
+    {{ with .Site.Menus.footer_notices }}
+    <ul class="footer-notices-links" aria-label="legal notices">
+      {{- range . -}}
+      <li>
+        <a href="{{ .URL }}" class="muted-with-hover">
+          {{ with .Pre }}<div class="footer-social-links-pre">{{ partialCached (printf "%s" . ) $ }}</div>{{ end }}
+          {{ with .Name }}<small>{{ . }}</small>{{ end }}
+          {{ .Post }}
+        </a>
+      </li>
+      {{- end -}}
+    </ul>
+    {{ end }}
+  </div>
+</footer>

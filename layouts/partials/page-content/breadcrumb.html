@@ -1,0 +1,26 @@
+{{ $bc := newScratch }}
+{{ $bc.Add "bc" slice}}
+{{ template "breadcrumbcalc" (dict "p1" . "p2" . "counter" 0 "out" $bc) }}
+<ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList">
+  {{- range $key, $value := sort ($bc.Get "bc") "counter" "desc" -}}
+  {{ $position := add $key 1 }}
+  <li property="itemListElement" typeof="ListItem">
+    {{ if eq $.Permalink $value.link }}
+    <span property="name">{{ $value.title }}</span>
+    {{ else }}
+    <a property="item" typeof="WebPage" href="{{ $value.link }}"><span property="name">{{ $value.title }}</span></a>
+    {{ end }}
+    <meta property="position" content="{{ $position }}" />
+  </li>
+  {{- end -}}
+</ol>
+
+{{ define "breadcrumbcalc" }}
+  {{ $counter := add .counter 1 }}
+  {{ if .p1.Parent }}
+    {{ template "breadcrumbcalc" (dict "p1" .p1.Parent "p2" .p2 "counter" $counter "out" .out)  }}
+  {{ else if not .p1.IsHome }}
+    {{ template "breadcrumbcalc" (dict "p1" .p1.Site.Home "p2" .p2 "counter" $counter "out" .out)  }}
+  {{ end }}
+  {{ .out.Add "bc" (dict "counter" $counter "title" .p1.LinkTitle "link" .p1.Permalink) }}
+{{ end }}
