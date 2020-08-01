@@ -452,17 +452,6 @@ dd {
 
 /* ******************* header ******************************************* */
 
-/* .header {
-  grid-area: header;
-  display: grid;
-  grid-gap: 8px;
-  gap: 8px;
-  grid-template-columns: auto auto 1fr;
-  grid-template-areas: "logo logotype toplinks";
-  max-width: 100%;
-  padding: var(--body-padding);
-} */
-
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -567,11 +556,6 @@ dd {
   list-style-type: none;
 }
 
-/* .leftnavmenu > ul ul {
-  padding-left: 1rem;
-  margin-left: 0.346rem;
-} */
-
 .leftnavroot {
   margin: 0;
   padding: 0;
@@ -659,7 +643,7 @@ dd {
   padding-left: 1rem;
 }
 
-/* added to element via .js onclick - shows hidden nested nav block */
+/* added to element via .js on-click - shows hidden nested nav block */
 .expand {
   border-left: thin solid var(--primary-light-variant);
   display: block;
@@ -1267,7 +1251,7 @@ td > code,
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
-      /* "actionbar" */
+      /* "action-bar" */
       "content"
       "footer";
   }
@@ -1409,7 +1393,7 @@ article a:focus,
   this looks hideous & surprising on mouse navigation.
   however, this is an accessibility issue in that you
   WOULDN'T want to remove outline from keyboard users
-  to show element is focusable, therefore, for the benefit
+  to show element is focus-able, therefore, for the benefit
   of chrome and only chrome, least bad option is to style
   color to something brand appropriate.
   */
