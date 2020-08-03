@@ -1,6 +1,9 @@
-{{ with .GitInfo }}
-  {{ $dateFormat := $.Param "date" | default "2006-01-02 15:04" }}
-  <div class="page-git-info elevation-02">
-    <small>Last edited by {{ .AuthorName }} on {{ .AuthorDate.Format $dateFormat }}, with comment: "{{ .Subject }}"</small>
-  </div>
-{{ end }}
+{{ if .Param "page_show_git_info" | default true -}}
+{{ with .GitInfo -}}
+{{ $dateFormat := $.Param "date_format_git" | default "2006-01-02 15:04" -}}
+<div class="page-git-info elevation-02">
+  <small class="small-block">Last edited by {{ .AuthorName }} on {{ .AuthorDate.Format $dateFormat }}, with comment:
+    "{{ .Subject }}"</small>
+</div>
+{{ end -}}
+{{ end -}}
