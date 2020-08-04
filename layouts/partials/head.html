@@ -1,4 +1,5 @@
 {{ $doStrictValidate := .Param "seo_enable_strict_validate" | default false -}}
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -49,9 +50,13 @@
   {{ end -}}
   {{ with .Params.robots -}}
     <meta name="robots" content="{{.}}">
-  {{- end }}
-  {{ partial "gtag.html" . -}}
-  {{ partial "social/head.html" . -}}
-  {{ partial "seo/head.html" . -}}
-  {{ partial "custom-head.html" . -}}
+  {{ end }}
+
+  {{ partial "gtag.html" . }}
+
+  {{ partial "social/head.html" . }}
+
+  {{ partial "seo/head.html" . }}
+
+  {{ partial "custom-head.html" . }}
 </head>
