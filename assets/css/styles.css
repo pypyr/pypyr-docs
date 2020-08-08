@@ -213,9 +213,22 @@ strong {
 }
 
 article ul,
-ol {
-  padding-left: 40px;
+article ol {
+  padding-left: 2rem;
+}
+
+article > ul,
+article > ol {
   padding-bottom: 1rem;
+}
+
+figure {
+  border: solid 3px var(--elevation-01);
+  margin: 1rem;
+}
+
+figcaption {
+  text-align: center;
 }
 
 /* ******************* END typography ************************************** */
@@ -259,6 +272,19 @@ summary {
   position: relative;
   text-align: center;
   top: 50%;
+}
+
+.sensible-width-narrow {
+  width: var(--sensible-width-narrow);
+}
+
+.sensible-width-wide {
+  width: var(--sensible-width-wide);
+}
+
+.sensible-width-narrow img,
+.sensible-width-wide img {
+  width: 100%;
 }
 
 /* make sure inline <code> do not overflow
