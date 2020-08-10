@@ -17,9 +17,9 @@
                 rel="alternate"
                 hreflang="{{ .Language.Lang }}"
                 href="{{ .Permalink }}"
-                />{{ end }}{{ range .Resources.ByType "image" }}
+                />{{ end }}{{ range .Params.sitemap_images }}
     <image:image>
-        <image:loc>{{ .Permalink }}</image:loc>{{ with .title }}
+        <image:loc>{{ (resources.Get .src | fingerprint).Permalink }}</image:loc>{{ with .title }}
         <image:title>{{ . }}</image:title>{{ end }}
     </image:image>
   {{ end }}{{ end }}
