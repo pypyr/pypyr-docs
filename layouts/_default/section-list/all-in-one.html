@@ -9,14 +9,14 @@
                     {{ $.Scratch.Add "adHocHeaders" (dict "id" $anchor "text" .LinkTitle ) }}
                     <header class="aio-row-full">
                         <h2 id="{{ $anchor }}" class="aio-heading">{{ .LinkTitle | safeHTML }}</h2><a href="{{ .RelPermalink }}" class="muted-with-hover">#</a>
+                        {{ with (.Description | default .Summary) }}
+                        <p class="aio-tagline">{{ . | markdownify }}</p>
+                        {{ end }}
                     </header>
-                    {{ with (.Description | default .Summary) }}
-                        <div class="aio-row-full no-bottom-margin"><p>{{ . | markdownify }}</p></div>
-                    {{ end }}
                     {{ with .Pages }}
                         <dl class="aio-pages">
                             {{ range . }}
-                                <dt class="aio-col1"><a href="{{ .Permalink }}">{{ .LinkTitle | safeHTML }}</a></dt>
+                                <dt class="aio-col1"><a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a></dt>
                                 <dd class="aio-col2">{{ (.Description | default .Summary ) | markdownify }}</dd>
                             {{ end }}
                         </dl>

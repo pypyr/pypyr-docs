@@ -836,7 +836,7 @@ dd {
   background-color: var(--elevation-01);
   border: solid 1px var(--elevation-01);
   display: grid;
-  grid-gap: 1rem 0;
+  grid-gap: 1px;
   gap: 1px;
   grid-template-columns: auto auto;
   list-style: none;
@@ -856,6 +856,11 @@ dd {
 .aio-heading {
   display: inline-block;
   margin-right: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.aio-tagline {
+  margin-bottom: 0.5rem;
 }
 
 .aio-row-full > a {
@@ -866,15 +871,12 @@ dd {
 .aio-col1 {
   background-color: var(--background);
   grid-column: 1;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 1rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
 }
 
 .aio-col2 {
   background-color: var(--background);
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
+  padding: 0.5rem;
 }
 
 .skip-grid {
