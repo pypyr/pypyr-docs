@@ -126,6 +126,7 @@ h6 {
   color: var(--primary-dark-variant);
   font-weight: 600;
   line-height: 1.4;
+  max-width: calc(var(--text-line-length) * 1.75);
 }
 
 h1 {
