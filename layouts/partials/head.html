@@ -22,7 +22,7 @@
   <meta name="description" content="{{ . }}">
   {{ end -}}
   <!-- css -->
-  {{ $style := resources.Match "css/styles*.css"| resources.Concat "styles.css" | minify | fingerprint -}}
+  {{ $style := resources.Match "css/styles*.css"| resources.Concat "css/styles.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $style.Permalink }}" {{ printf "integrity=%q" $style.Data.Integrity | safeHTMLAttr }}>
   {{ $codeStyle := resources.Get "css/code-highlight.css"| minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $codeStyle.Permalink }}" {{ printf "integrity=%q" $codeStyle.Data.Integrity | safeHTMLAttr }}>
