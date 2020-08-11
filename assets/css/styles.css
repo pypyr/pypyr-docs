@@ -943,10 +943,13 @@ p > code,
 td > code,
 .admonition-content > code {
   background: var(--background-elevation-01);
+  border-radius: 3px;
   color: var(--text-on-surface-medium);
   font-size: 85%;
+  overflow: visible;
   padding: 0.1rem 0.2rem;
-  border-radius: 3px;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .section-summary-card p > code {
