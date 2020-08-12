@@ -652,8 +652,11 @@ dd {
 
 .nav-section-chevron-title span span {
   letter-spacing: normal;
-  padding-left: 0.2rem;
   vertical-align: middle;
+}
+
+.nav-section-chevron-title span span::before {
+  content: "\00a0";
 }
 
 .nav-chevron {
