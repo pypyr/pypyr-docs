@@ -652,6 +652,7 @@ dd {
 
 .nav-section-chevron-title span span {
   letter-spacing: normal;
+  padding-left: 0.2rem;
   vertical-align: middle;
 }
 
@@ -1031,7 +1032,7 @@ td > code,
 
 /* Add a separator before/behind each list item */
 .breadcrumb li + li::before {
-  content: ">";
+  content: " > ";
 }
 
 /* ******************* END breadcrumb **********************/

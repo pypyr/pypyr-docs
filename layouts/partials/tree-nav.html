@@ -27,8 +27,7 @@
             <svg class="nav-chevron{{ if $isAncestor }} nav-chevron-down{{ end }}">
               <title>open or close sub-menu</title>
               <use href="{{ $currentPage.Scratch.Get "chevron" }}#chevron-right"></use>
-            </svg>
-            <span>{{ .Name }}</span>
+            </svg><span>{{ .Name }}</span>
           </span>
         </button>
 
