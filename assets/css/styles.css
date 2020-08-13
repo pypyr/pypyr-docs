@@ -321,6 +321,12 @@ td {
   text-align: center;
 }
 
+.home-hero-title > h1,
+.home-hero-title > h2,
+.home-hero-title > h3 {
+  margin: 0 auto;
+}
+
 .home-hero-title > h3 {
   margin-bottom: var(--text-bottom-margin);
 }
