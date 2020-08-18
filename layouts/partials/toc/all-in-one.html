@@ -1,0 +1,5 @@
+{{- $headers := slice -}}
+{{- range partial "list/get-pages.html" .}}
+    {{ $headers = $headers | append (dict "id" (.LinkTitle | anchorize) "text" .LinkTitle ) }}
+{{- end -}}
+{{- return $headers -}}
