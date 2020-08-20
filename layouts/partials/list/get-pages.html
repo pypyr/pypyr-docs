@@ -31,13 +31,13 @@
 {{ $paginateMax := $.Param "list_paginate" }}
 {{ $sorter := $.Param "list_sort" | default "list/sort/weight-linktitle.html" }}
 {{ if $paginateMax }}
-    {{ $out = (.Paginate ((partial $sorter $pages)) $paginateMax).Pages }}
+    {{ $out = (.Paginate ((partial $sorter (dict "context" $ "pages" $pages))) $paginateMax).Pages }}
 {{ else }}
     {{ $limit := $.Param "list_limit" | default 0 }}
     {{ if gt $limit 0 }}
-        {{ $out = first $limit (partial $sorter $pages) }}
+        {{ $out = first $limit (partial $sorter (dict "context" $ "pages" $pages)) }}
     {{ else }}
-        {{ $out = (partial $sorter $pages) }}
+        {{ $out = (partial $sorter (dict "context" $ "pages" $pages)) }}
     {{ end }}
 {{ end }}
 

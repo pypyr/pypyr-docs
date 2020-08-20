@@ -1,1 +1,1 @@
-{{ return .ByParam ($.Param "list_sort_param") }}
+{{ return .pages.ByParam (.context.Param "list_sort_param") }}
