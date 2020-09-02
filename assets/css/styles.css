@@ -354,7 +354,7 @@ section.cards {
   grid-template-columns: repeat(auto-fit, minmax(var(--home-cards-min-width), 1fr));
   justify-content: center;
   width: 90%;
-  margin: var(--gap) auto 0;
+  margin: var(--gap) auto 3.5rem;
 }
 
 section.cards > div.card {
