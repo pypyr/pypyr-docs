@@ -1,15 +1,15 @@
 .highlight, pre.highlight {
-  background: #282c34;
-  color: #abb2bf
+  /* background: #282c34; */
+  color: #abb2bf;
 }
-
+/* 
 .highlight pre {
   background: #282c34
 }
 
 .highlight .hll {
   background: #282c34
-}
+} */
 
 .highlight .c {
   color: #5c6370;
