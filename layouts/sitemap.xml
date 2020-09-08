@@ -20,9 +20,15 @@
                 />{{ end }}{{ range .Params.sitemap_images }}
     <image:image>
         <image:loc>{{ (resources.Get .src | fingerprint).Permalink }}</image:loc>{{ with .title }}
-        <image:title>{{ . }}</image:title>{{ end }}
-    </image:image>
-  {{ end }}{{ end }}
+        <image:title>{{ . }}</image:title>{{ end }}{{ with .caption }}
+        <image:caption>{{ . }}</image:caption>{{ end }}
+    </image:image>{{ end }}{{ range .Resources.ByType "image" }}
+    <image:image>
+        <image:loc>{{ ( . | fingerprint).Permalink }}</image:loc>{{ with .Title }}
+        <image:title>{{ . }}</image:title>{{ end }}{{ with .Params.caption }}
+        <image:caption>{{ . }}</image:caption>{{ end }}
+    </image:image>{{ end }}
   </url>
+  {{ end }}
   {{ end }}
 </urlset>

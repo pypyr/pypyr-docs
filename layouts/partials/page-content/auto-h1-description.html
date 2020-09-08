@@ -1,4 +1,7 @@
-{{- $isEmptyContent := eq (len .Content) 0 -}} {{/* (not .File) */}}
+{{- $isEmptyContent := true -}}
+{{- with .Content -}} {{/* avoid nil pointer err on (len .Content). this happens if a shortcode malfunctions and hides real error info. */}}
+    {{- $isEmptyContent = eq (len .) 0 -}} {{/* (not .File) */}}
+{{- end -}}
 {{- $showOnlyOnEmpty := .Param "show_auto_heading_only_on_empty_content" | default true -}}
 {{- if eq $isEmptyContent $showOnlyOnEmpty -}}
     {{- $showListTitle := and .IsNode (.Param "list_show_auto_title" | default true) -}}

@@ -1,13 +1,14 @@
 {{/* 
     code copies entire from hugo built-in figure template, with grateful thanks.
-    only addition is on .src, to get url from assets dir rather than just a 
-    straight string input. also small rather than p for caption.
+    only addition is on .src, to get get image from page bundle with 
+    fingerprint rather than just a straight string input. also small rather 
+    than p for caption.
 */}}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
     {{- if .Get "link" -}}
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
     {{- end }}
-    <img src="{{ (resources.Get (.Get "src") | fingerprint).Permalink }}"
+    <img src="{{ ($.Page.Resources.GetMatch (.Get "src") | fingerprint).Permalink }}"
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}
