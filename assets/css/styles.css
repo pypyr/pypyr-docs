@@ -226,6 +226,11 @@ article > ol {
 figure {
   border: solid 3px var(--elevation-01);
   margin: 1rem;
+  max-width: 100%;
+}
+
+figure > img {
+  max-width: 100%;
 }
 
 figcaption {
@@ -273,6 +278,14 @@ summary {
   position: relative;
   text-align: center;
   top: 50%;
+}
+
+.paragraph-max-width {
+  max-width: min(100%, var(--text-line-length));
+}
+
+.paragraph-80-width {
+  max-width: min(100%, 0.8 * var(--text-line-length));
 }
 
 .sensible-width-narrow {
@@ -550,7 +563,7 @@ dd {
   color: var(--primary);
   display: inline-block;
   fill: var(--text-on-surface-high);
-  font-size: 2vw;
+  font-size: clamp(1.5rem, 2vw, 2.5rem);
   letter-spacing: -0.015625rem;
   transition:
     color 1s ease-out,
@@ -560,7 +573,7 @@ dd {
 .top-nav-links-pre {
   display: inline-block;
   fill: inherit;
-  height: 1.8vw;
+  height: clamp(1.3rem, 1.8vw, 2.3rem);
   line-height: 0; /* so svg child is flush w this parent span */
   vertical-align: middle;
 }
@@ -1219,11 +1232,11 @@ td > code,
   }
 
   .top-nav-links a {
-    font-size: 1rem;
+    font-size: max(1rem, 2vw);
   }
 
   .top-nav-links-pre {
-    height: 1rem;
+    height: max(1rem, 1.9vw);
   }
 
   .home-hero-img {
