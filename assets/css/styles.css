@@ -301,16 +301,6 @@ summary {
   width: 100%;
 }
 
-/* make sure inline <code> do not overflow
-   <code> in <li> might overflow, coz you lose
-   the bullets when you set overflow on li. */
-dd,
-dt,
-p,
-td {
-  overflow-x: auto;
-}
-
 /* ******************* home ******************************************** */
 .home-hero {
   margin: auto;
