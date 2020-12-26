@@ -334,6 +334,13 @@ summary {
   margin-bottom: var(--text-bottom-margin);
 }
 
+.home-hero-show-support {
+  display: block;
+  margin: 2rem auto 0;
+  max-width: 60%;
+  text-align: center;
+}
+
 .home-hero-2-col {
   display: flex;
   flex-wrap: wrap;
