@@ -342,7 +342,7 @@ summary {
 }
 
 .home-hero-show-support > p {
-  margin: 0 auto;
+  margin: 0 auto var(--text-bottom-margin);
 }
 
 .home-hero-2-col {
