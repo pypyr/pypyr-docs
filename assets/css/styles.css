@@ -341,6 +341,10 @@ summary {
   text-align: center;
 }
 
+.home-hero-show-support > p {
+  margin: 0 auto;
+}
+
 .home-hero-2-col {
   display: flex;
   flex-wrap: wrap;
