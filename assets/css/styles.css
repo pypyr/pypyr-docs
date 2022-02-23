@@ -1056,6 +1056,7 @@ td > code,
   color: var(--text-on-surface-disabled);
   cursor: pointer;
   font-size: 0.95rem;
+  font-weight: 600;
   padding: 4px 24px;
   transition: background 0.3s, color 0.3s;
   text-align: center;
