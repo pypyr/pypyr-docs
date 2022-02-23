@@ -11,23 +11,12 @@
    theme master every time there's an update.
 */
 :root {
-  /* default theme: muted blue */
   --primary: #90caf9;
   --primary-dark-variant: #5d99c6;
   --primary-light-variant: #c3fdff;
   --secondary: #81d4fa;
   --secondary-dark-variant: #4ba3c7;
   --secondary-light-variant: #c3fdff;
-
-  /* theme: yuck sand
-  --primary: #d3c1c3;
-  --primary-dark-variant: #DDA15E ;
-  --primary-light-variant: #fff4f6;
-  --secondary: #e2d0be;
-  --secondary-dark-variant: #b09f8e;
-  --secondary-light-variant: #fffff1;
-  */
-
   --background: #121212;
   --surface: #121212;
   --error: #cf6679;
