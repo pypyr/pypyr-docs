@@ -58,7 +58,10 @@
   "publisher": {
     "@id": {{ .Param "seo_org_id" | jsonify }}
   },
-  "url": {{ .Permalink | jsonify }},
-  "wordCount": {{ .WordCount | jsonify }}
+  {{ with $thumbnailUrl := .Param "seo_article_thumbnail" -}}
+  "thumbnailUrl": {{ (resources.Get $thumbnailUrl | fingerprint ).Permalink | jsonify }},
+  {{ end -}}
+  "url": {{ .Permalink | jsonify }}{{ if gt .WordCount 0 }},
+  "wordCount": {{ .WordCount | jsonify }}{{ end }}
 {{ end -}}
 }
