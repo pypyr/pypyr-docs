@@ -1,0 +1,12 @@
+{{ $lang  := .Attributes.lang  | default .Type }}
+{{ if transform.CanHighlight $lang }}
+<div class="highlight-container">
+    <button type="button" class="clipboard-button">
+        {{ partial "svg/copy-icon.html" . }}
+        {{ partial "svg/checkmark-icon.html" . }}
+    </button>
+    {{ highlight .Inner $lang }}
+</div>
+{{else}}
+<pre><code>{{.Inner}}</code></pre>
+{{end}}

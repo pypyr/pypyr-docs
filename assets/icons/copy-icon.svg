@@ -1,0 +1,7 @@
+<svg id="copy-icon" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs><style>.a{stroke:#000000;}</style></defs>
+    <g id="copy" transform="translate(8.000000, 8.000000)" class="a" stroke-width="6" fill="none">
+        <path d="M32,42.0988208 L32,44 C32,46.209139 30.209139,48 28,48 L4,48 C1.790861,48 0,46.209139 0,44 L0,20 C0,17.790861 1.790861,16 4,16 C4.90955005,16 5.59171259,16 6.04648762,16" id="bottom" stroke-linecap="round"></path>
+        <rect id="top" x="16" y="0" width="32" height="32" rx="4"></rect>
+    </g>
+</svg>

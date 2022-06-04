@@ -1,3 +1,25 @@
+async function copyCode(event) {
+  const button = event.currentTarget;
+  const highlightContainer = button.parentElement;
+  const code = highlightContainer.querySelector('div.highlight pre code');
+  const text = code.innerText;
+  await window.navigator.clipboard.writeText(text).then(() => {
+    button.classList.toggle('cp-success-state');
+    const copyIcon = button.querySelector('svg.copy-icon');
+    copyIcon.classList.toggle('hide-icon');
+    const successIcon = button.querySelector('svg.checkmark-icon');
+    successIcon.classList.toggle('show-icon');
+    setTimeout(() => {
+      button.classList.toggle('cp-success-state');
+      copyIcon.classList.toggle('hide-icon');
+      successIcon.classList.toggle('show-icon');
+    }, 2000);
+  }, (error) => {
+    button.innerHTML = 'err!';
+    console.log(error);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const sections = document.getElementsByClassName('nav-section-chevron-title');
 
@@ -32,5 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (hideNavButton) {
     hideNavButton.addEventListener('click', hideNav);
+  }
+
+  // only do copy if browser supports clipboard api
+  if (window.navigator && window.navigator.clipboard) {
+    const clipboardButtons = document.getElementsByClassName('clipboard-button');
+    Array.from(clipboardButtons).forEach((button) => {
+      button.addEventListener('click', copyCode);
+    });
   }
 });

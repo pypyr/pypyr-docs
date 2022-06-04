@@ -952,12 +952,56 @@ samp {
   padding: 1rem;
 }
 
+.highlight-container {
+  background: var(--background-elevation-01);
+  margin: var(--gap) 0;
+  position: relative;
+}
+
 .highlight {
   background: var(--background-elevation-01);
   font-family: 'Roboto Mono', monospace;
   font-size: initial;
-  margin: var(--gap) 0;
   overflow: hidden;
+}
+
+.clipboard-button {
+  background-color: transparent;
+  border: 1px solid var(--text-on-surface-medium);
+  border-radius: 6px;
+  color: var(--text-on-surface-medium);
+  height: 1.5rem;
+  opacity: 0;
+  padding: 0.2rem;
+  position: absolute;
+  right: 8px;
+  stroke: var(--text-on-surface-medium);
+  transition: opacity 0.5s ease-in-out, border-color 0.5s ease-in-out, stroke 0.5s ease-in-out;
+  width: 1.5rem;
+}
+
+.copy-icon {
+  height: 100%;
+  stroke: inherit;
+}
+
+.checkmark-icon {
+  display: none;
+  stroke: var(--primary-light-variant);
+  height: 100%;
+}
+
+.hide-icon {
+  display: none;
+}
+
+.show-icon {
+  display: inline-block;
+}
+
+.cp-success-state {
+  border-color: var(--primary-light-variant);
+  opacity: 1;
 }
 
 /* inline code */
@@ -1081,6 +1125,10 @@ td > code,
   background: var(--background-elevation-01);
   order: 1;
   width: 100%;
+}
+
+.tab .highlight-container {
+  margin: 0;
 }
 
 .tab-radio:checked + .tab-label + .tab {
@@ -1396,6 +1444,7 @@ td > code,
     bottom: 8px;
     position: fixed;
     right: 8px;
+    z-index: 1;
   }
 
   .bottom-spacer {
@@ -1529,6 +1578,7 @@ article a:focus,
   outline: none;
 } */
 
+.clipboard-button:active,
 .neutral-button:active,
 .header a:active,
 .top-nav-logotype a:active,
@@ -1548,6 +1598,16 @@ article a:focus,
   background-color: var(--primary-light-variant);
   transform: translateY(2px);
   filter: saturate(150%);
+}
+
+.clipboard-button:not(.cp-success-state):hover {
+  cursor: pointer;
+  border-color: var(--secondary-light-variant);
+  stroke: var(--secondary-light-variant);
+}
+
+.highlight-container:hover > .clipboard-button {
+  opacity: 1;
 }
 
 /* ******************* END hover effects ********************/
