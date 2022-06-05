@@ -3,7 +3,7 @@ async function copyCode(event) {
   const highlightContainer = button.parentElement;
   const code = highlightContainer.querySelector('div.highlight pre code');
   const text = code.innerText;
-  await window.navigator.clipboard.writeText(text).then(() => {
+  window.navigator.clipboard.writeText(text).then(() => {
     button.classList.toggle('cp-success-state');
     const copyIcon = button.querySelector('svg.copy-icon');
     copyIcon.classList.toggle('hide-icon');
@@ -16,20 +16,23 @@ async function copyCode(event) {
     }, 2000);
   }, (error) => {
     button.innerHTML = 'err!';
-    console.log(error);
+    console.error(error);
   });
+}
+
+function toggle(event) {
+  const menuItem = event.currentTarget;
+  menuItem.parentElement.querySelector('.nested').classList.toggle('expand');
+  menuItem.querySelector('.nav-chevron').classList.toggle('nav-chevron-down');
+  event.preventDefault();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const sections = document.getElementsByClassName('nav-section-chevron-title');
 
-  for (let i = 0; i < sections.length; i += 1) {
-    sections[i].addEventListener('click', function toggle(e) {
-      this.parentElement.querySelector('.nested').classList.toggle('expand');
-      this.querySelector('.nav-chevron').classList.toggle('nav-chevron-down');
-      e.preventDefault();
-    });
-  }
+  Array.from(sections).forEach((section) => {
+    section.addEventListener('click', toggle);
+  });
 
   const showNavButton = document.getElementById('show-leftnav');
   const hideNavButton = document.getElementById('hide-leftnav');
