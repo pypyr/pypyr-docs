@@ -1,0 +1,18 @@
+[
+  {{- range $i, $page := .Site.AllPages -}}
+    {{- if ne $i 0 }},{{ end }}
+    {
+      "objectID": {{ .Permalink | jsonify }},
+      "relLink": {{ .RelPermalink | jsonify }},
+      "linkTitle": {{ .LinkTitle | jsonify }},
+      "title": {{ .Title | jsonify }},
+      "description": {{ .Description | jsonify }},
+      "seoTitle": {{ .Param "seo_article_headline" | jsonify }},
+      "seoDescription": {{ .Param "seo_description" | jsonify }},
+      "keywords": {{ .Param "keywords" | jsonify }},
+      "topics": {{ .Param "topics" | jsonify }},
+      "categories": {{ .Param "categories" | jsonify }},
+      "date": {{ .Param "date" | jsonify }}
+    }
+  {{- end -}}
+]
