@@ -20,7 +20,7 @@
     "height": {{ $height | jsonify }},
     "width": {{ $width | jsonify }}
   }{{ end }}{{ with .Param "seo_org_same_as"}},
-  "sameAs": [{{ delimit (apply . "jsonify" ".") ", "}}]
+  "sameAs": {{- . | jsonify -}}
   {{ end -}}
 {{ end -}}
 }

@@ -16,7 +16,7 @@
     "@type": "Person",
     "name": {{ . | jsonify }}{{ with $page.Param "seo_article_author_url"}},
     "url": {{ . | jsonify }}{{ end }}{{ with $page.Param "seo_article_author_same_as"}},
-    "sameAs": [{{ delimit (apply . "jsonify" ".") ", "}}]
+    "sameAs": {{- . | jsonify -}}
     {{ end }}
   },
   {{ else -}}
