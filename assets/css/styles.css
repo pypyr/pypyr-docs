@@ -1390,7 +1390,6 @@ td > code,
   }
 
   .header {
-    grid-area: header;
     grid-gap: 4px;
     gap: 4px;
   }
