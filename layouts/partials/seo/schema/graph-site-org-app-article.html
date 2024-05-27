@@ -1,0 +1,12 @@
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": 
+      [
+        {{ partial "seo/schema/website.html" (dict "doContext" false "context" . ) | safeJS }},
+        {{ partial "seo/schema/organization.html" (dict "doContext" false "context" . ) | safeJS }},
+        {{ partial "seo/schema/softwareapplication.html" (dict "doContext" false "context" .) | safeJS }},
+        {{ partial "seo/schema/article.html" (dict "doContext" false "context" . ) | safeJS }}
+      ]
+    }
+</script>

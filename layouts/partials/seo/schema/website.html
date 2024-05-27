@@ -1,0 +1,12 @@
+{
+{{- if .doContext }}
+  "@context": "https://schema.org",
+{{- end }}
+{{- with .context }}
+  "@type" : "WebSite",
+  "name": {{ .Param "seo_site_name" | jsonify }},
+  "url": {{ .Param "baseUrl"  | jsonify }}{{ with .Param "seo_site_alternate_name"}},
+  "alternateName": {{- . | jsonify }}
+  {{ end -}}
+{{ end -}}
+}
