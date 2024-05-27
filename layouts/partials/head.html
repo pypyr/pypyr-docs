@@ -7,7 +7,7 @@
   {{ $maxTitle := .Param "seo_validate_title_max" | default 60 -}}
   {{ if and $doStrictValidate (gt (len $title) $maxTitle) -}}
     {{ errorf "title > %v chars. Page: %q Title: %q" $maxTitle .Path $title -}}
-  {{ else if and $doStrictValidate (eq (len $title) 3)}}
+  {{ else if and $doStrictValidate (eq (len $title) 2)}}
     {{ errorf "title empty. Page: %q" .Path -}}
   {{ end -}}
   <title>{{ $title }}</title>
